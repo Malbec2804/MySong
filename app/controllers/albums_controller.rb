@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
   before_action :set_album, only: [:show, :update, :destroy]
-
+  
   # GET /albums
   def index
     @albums = Album.all
