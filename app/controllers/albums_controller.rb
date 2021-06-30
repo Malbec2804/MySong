@@ -5,12 +5,12 @@ class AlbumsController < ApplicationController
   def index
     @albums = Album.all
 
-    render json: @albums
+    render json: @albums.to_json(only: [:id, :name, :year, :album_art, :total_duration, :cached_songs])
   end
 
   # GET /albums/1
   def show
-    render json: @album
+    render json: @album.to_json(only: [:id, :name, :year, :album_art, :total_duration, :cached_songs])
   end
 
   # POST /albums
@@ -46,6 +46,6 @@ class AlbumsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def album_params
-      params.require(:album).permit(:name, :year, :album_art, :total_duration, :cached_songs)
+      params.require(:album).permit(:name, :year, :album_art, :total_duration, :cached_songs).with_defaults(total_duration: 0, cached_songs: {})
     end
 end
