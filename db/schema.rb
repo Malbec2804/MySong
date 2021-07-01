@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_124148) do
+ActiveRecord::Schema.define(version: 2021_07_01_214822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 2021_06_30_124148) do
     t.integer "streams"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "album_id"
+    t.index ["album_id"], name: "index_songs_on_album_id"
   end
 
 end
