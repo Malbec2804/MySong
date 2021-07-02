@@ -5,12 +5,12 @@ class AlbumsController < ApplicationController
   def index
     @albums = Album.all
 
-    render json: @albums.to_json(only: [:id, :name, :year, :album_art, :total_duration, :cached_songs])
+    render json: @albums, each_serializer: AlbumsSerializer # .to_json(only: [:name, :year, :album_art, :total_duration, :cached_songs])
   end
 
   # GET /albums/1
   def show
-    render json: @album.to_json(only: [:id, :name, :year, :album_art, :total_duration, :cached_songs])
+    render json: @album, serializer: AlbumsSerializer #.to_json(only: [:name, :year, :album_art, :total_duration, :cached_songs])
   end
 
   # POST /albums
