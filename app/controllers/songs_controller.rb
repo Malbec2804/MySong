@@ -1,11 +1,11 @@
 class SongsController < ApplicationController
   before_action :set_song, only: [:show, :update, :destroy]
-
+  
   # GET /songs
   def index
     @songs = Song.all
 
-    render json: @songs.to_json(only: [:name, :duration, :genre, :streams])
+    render json: @songs.to_json(only: [:name, :duration, :genre, :streams, :album_id])
   end
 
   # GET /songs/1
@@ -16,7 +16,7 @@ class SongsController < ApplicationController
   # POST /songs
   def create
     @song = Song.new(song_params)
-
+    
     if @song.save
       render json: @song, status: :created, location: @song
     else
@@ -46,6 +46,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:name, :duration, :genre, :streams).with_defaults(streams: 0)
+      params.require(:song).permit(:name, :duration, :genre, :streams, :album_id).with_defaults(streams: 0)
     end
 end
