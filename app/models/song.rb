@@ -1,5 +1,6 @@
 class Song < ApplicationRecord
     belongs_to :album
+    has_many :artists
     validates :name, presence: {message: "Debe tener nombre."}, length: {in: 3..20}
     validates :duration, numericality: true
     validates :genre, inclusion: {in: %w(Alternative-Rock Blues Classical Country Electronic Funk Heavy-Metal Hip-Hop Jazz Pop Reggae Soul Rock),
