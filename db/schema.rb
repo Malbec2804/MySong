@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_03_222109) do
+ActiveRecord::Schema.define(version: 2021_07_05_141032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(version: 2021_07_03_222109) do
     t.jsonb "cached_songs"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "artist_balances", force: :cascade do |t|
+    t.bigint "artist_id", null: false
+    t.float "balance"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artist_id"], name: "index_artist_balances_on_artist_id"
   end
 
   create_table "artists", force: :cascade do |t|
@@ -45,4 +53,5 @@ ActiveRecord::Schema.define(version: 2021_07_03_222109) do
     t.index ["album_id"], name: "index_songs_on_album_id"
   end
 
+  add_foreign_key "artist_balances", "artists"
 end
