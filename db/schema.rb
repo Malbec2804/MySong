@@ -10,49 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_05_210403) do
+ActiveRecord::Schema.define(version: 2021_07_08_004343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "albums", force: :cascade do |t|
-    t.string "name"
-    t.integer "year"
+    t.string "name", limit: 30, null: false
+    t.integer "year", null: false
     t.string "album_art"
-    t.integer "total_duration"
-    t.jsonb "cached_songs"
+    t.integer "total_duration", default: 0, null: false
+    t.jsonb "cached_songs", default: {}, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "artist_balances", force: :cascade do |t|
     t.bigint "artist_id", null: false
-    t.float "balance"
+    t.float "balance", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["artist_id"], name: "index_artist_balances_on_artist_id"
   end
 
   create_table "artists", force: :cascade do |t|
-    t.string "name"
-    t.text "biography"
+    t.string "name", limit: 30, null: false
+    t.text "biography", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "song_id"
-    t.bigint "album_id"
-    t.index ["album_id"], name: "index_artists_on_album_id"
-    t.index ["song_id"], name: "index_artists_on_song_id"
   end
 
   create_table "songs", force: :cascade do |t|
-    t.string "name"
-    t.integer "duration"
-    t.string "genre"
-    t.integer "streams"
+    t.string "name", limit: 30, null: false
+    t.integer "duration", null: false
+    t.string "genre", null: false
+    t.integer "streams", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "album_id"
-    t.index ["album_id"], name: "index_songs_on_album_id"
   end
 
   add_foreign_key "artist_balances", "artists"
