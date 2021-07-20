@@ -35,7 +35,7 @@ class SongsController < ApplicationController
 
   # DELETE /songs/1
   def destroy
-    @song.destroy
+    @song = DeleteSongService.new(@song.id, song_params[:album_ids]).call
   end
 
   private
