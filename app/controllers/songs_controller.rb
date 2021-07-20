@@ -15,7 +15,7 @@ class SongsController < ApplicationController
 
   # POST /songs
   def create
-    @song = SongService.new(song_params[:name], song_params[:duration], song_params[:genre]).call
+    @song = SongService.new(song_params[:name], song_params[:duration], song_params[:genre], song_params[:album_ids]).call
     if @song.save
       @albumsong = CreateAlbumSongService.new(song_params[:album_ids], @song.id).call
       render json: @song, status: :created, location: @song
