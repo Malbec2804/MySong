@@ -1,6 +1,8 @@
 class Song < ApplicationRecord
     has_many :album_songs
     has_many :albums, through: :album_songs
+    has_many :song_artists
+    has_many :artists, through: :song_artists
 
     validates :name, presence: {message: "Debe tener nombre."}, length: {in: 3..20}
     validates :duration, numericality: true
