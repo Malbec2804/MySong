@@ -10,7 +10,7 @@ class CreateSongArtistService
         begin
             ActiveRecord::Base.transaction do
                 
-                SongArtist.create(song_id: @song_id, artist_id: @artist_id)
+                SongArtist.create!(song_id: @song_id, artist_id: @artist_id)
                 
             end
         end

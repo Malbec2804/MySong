@@ -15,10 +15,9 @@ class SongsController < ApplicationController
 
   # POST /songs
   def create
-    @song = SongService.new(song_params[:name], song_params[:duration], song_params[:genre], song_params[:album_ids], song_params[:nameart], song_params[:biography]).call
+    @song = SongService.new(song_params[:name], song_params[:duration], song_params[:genre], song_params[:album_ids], song_params[:artists]).call
     if @song.save
-      @albumsong = CreateAlbumSongService.new(song_params[:album_ids], @song.id).call
-      @songart =  CreateSongArtistService.new(@song.id, Artist.last.id).call
+      
       render json: @song, status: :created, location: @song
       else
       render json: @song.errors, status: :unprocessable_entity
@@ -47,6 +46,6 @@ class SongsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def song_params
-      params.require(:song).permit(:name, :duration, :genre, :album_ids, :nameart, :biography)
+      params.require(:song).permit(:name, :duration, :genre, album_ids:[], artists: [:nameart, :biography])
     end
 end

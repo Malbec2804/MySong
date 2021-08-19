@@ -1,4 +1,4 @@
 class AlbumsSerializer < ActiveModel::Serializer
-  attributes :id, :name, :year, :album_art, :total_duration, :cached_songs, :songs
+  attributes :id, :name, :year, :album_art, :total_duration, :cached_songs
   has_many :songs
 end
